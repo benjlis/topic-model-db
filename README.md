@@ -1,2 +1,2 @@
-# topic-model-schema
-A relational database (sub)schema for storing topics models
+# topic-model-db
+DDL and load scripts for topics models
