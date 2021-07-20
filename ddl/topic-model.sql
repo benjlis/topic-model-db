@@ -1,3 +1,4 @@
+-- Generalized topic-model db component
 create table if not exists tokens (
     token_id        integer     primary key,
     token           varchar(20) not null
