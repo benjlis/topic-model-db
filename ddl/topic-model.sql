@@ -23,7 +23,7 @@ comment on table topic_tokens is
 
 create table if not exists topic_docs (
     topic_id        integer     references topics,
-    doc_id          integer     /* references docs */,
+    doc_id          text        /* references docs */,
     score           float       not null,
     primary key (topic_id, doc_id)
 );
