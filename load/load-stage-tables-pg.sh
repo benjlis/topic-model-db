@@ -14,7 +14,6 @@ load_stage ()
 {
     table_name="${SCHEMA}.${1}_stage"
     csv_file="${CSV_DIR}/${COLLECTION}_${1}.csv"
-    cp_command="\copy ${table_name} from '${csv_file}' delimiter ',' csv header;"
     psql -X -e ${PSQL_ARGS} <<!EOF!
     \copy ${table_name} from '${csv_file}' delimiter ',' csv header
 !EOF!
