@@ -20,11 +20,6 @@ load_stage ()
 !EOF!
 }
 
-#earlier iterations
-#cc="\copy ${SCHEMA}.tokens_stage(value, id) FROM 'data/${COLLECTION}_tokens.csv' delimiter ',' csv header;"
-#echo ${cc}   | psql ${PSQL_ARGS}
-#load_stage "${SCHEMA}.tokens_stage(value, id)" "data/${COLLECTION}_tokens.csv"
-
 load_stage tokens
 load_stage topics
 load_stage topic_doc
