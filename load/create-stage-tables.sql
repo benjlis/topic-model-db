@@ -13,7 +13,9 @@ create table topics_stage (
 create table topic_doc_stage (
          doc_id          text,
          topic_id        integer,
-         topic_score     float
+         topic_score     float,
+         topicsum        float,
+         top75           integer
 );
 
 create table topic_token_stage (
