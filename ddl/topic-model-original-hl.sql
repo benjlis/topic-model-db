@@ -1,4 +1,7 @@
--- Current history lab version of the topic model tables
+-- Composite of the various topic model subschemas that existed in the 
+-- original History Lab MySQL database. 
+--
+-- Only meant for historical reference as it does not reflect current practice.
 create table topics (
     id      smallint primary key,
     title   text not null,
