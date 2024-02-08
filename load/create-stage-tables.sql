@@ -1,9 +1,4 @@
--- creates staging table for loading updted topic_models CSVs
-create table tokens_stage (
-	 value 	 text,
-	 id 	 integer
-);
-
+-- creates staging table for loading updated topic_models CSVs
 create table topics_stage (
          title   text,
          name    text,
@@ -17,9 +12,13 @@ create table topic_doc_stage (
          topicsum        float,
          top75           integer
 );
-
-create table topic_token_stage (
-         topic   integer,
-         beta    float,
-         id      integer
-);
+-- TBD remove tokens_stage and topic_token_stage
+-- create table tokens_stage (
+--	 value 	 text,
+--	 id 	 integer
+--);
+-- create table topic_token_stage (
+--         topic   integer,
+--         beta    float,
+--         id      integer
+--);

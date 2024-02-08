@@ -19,7 +19,8 @@ load_stage ()
 !EOF!
 }
 
-load_stage tokens
 load_stage topics
 load_stage topic_doc
-load_stage topic_token
+-- TBD removal of token related tables
+-- load_stage tokens
+-- load_stage topic_token
