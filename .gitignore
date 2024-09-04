@@ -1,1 +1,2 @@
-data/
+load/.env
+load/data
