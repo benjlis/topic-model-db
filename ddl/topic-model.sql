@@ -16,25 +16,3 @@ create table if not exists topic_docs (
 );
 comment on table topic_docs is
    'Strength of assocation between a topic and a doc';
-
--- Notes:
---    * will need index on doc_id
---    * name and datatype of doc_id will need to be updated
---
-
--- TBD remove tokens and topic_token
--- create table if not exists tokens (
---    token_id        integer     primary key,
---    token           text        not null
--- );
--- comment on table tokens is
---   'Set of tokens/words generated during topic modeling';
---
--- create table if not exists topic_tokens (
---     topic_id        integer     references topics,
---     token_id        integer     references tokens,
---     score           float       not null,
---     primary key(topic_id, token_id)
--- );
--- comment on table topic_tokens is
---     'Strength of association between a topic and a token';
