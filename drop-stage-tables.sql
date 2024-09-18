@@ -1,2 +1,2 @@
-drop table topics_stage;
-drop table topic_doc_stage;
+drop table foiarchive.topics_stage;
+drop table foiarchive.topic_doc_stage;
