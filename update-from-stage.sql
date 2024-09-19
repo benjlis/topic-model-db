@@ -1,5 +1,5 @@
 \set ON_ERROR_STOP 1
-
+\timing on
 begin;
 -- delete the existing version of the model
 delete from foiarchive.topic_docs where corpus = :'corpus';
