@@ -1,3 +1,5 @@
+-- delete previous model
+
 -- populates the topic model tables from stage
 insert into foiarchive.topics(corpus, topic_id, title, name)
 select :'corpus', id, title, name 
