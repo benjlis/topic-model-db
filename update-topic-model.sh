@@ -51,4 +51,5 @@ psql -X -e ${DBCONNECT} -f create-stage-tables.sql
 heading "Load CSVs into staging tables:"
 load_stage topics
 load_stage topic_doc
-# Update  the tables from the stage tables
+# Update the production tables from the stage tables
+psql -X -e ${DBCONNECT} -v corpus=${CORPUS} -f update-from-stage.sql
