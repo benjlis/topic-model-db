@@ -1,15 +1,21 @@
 #
-# load-stage-tables-pg.sh ${1}
-#     where ${1} is the topic model's corpus name prefix (e.g. kissinger) 
+# usage:
+#    update-topic-model.sh ${1}
+#        where ${1} is the topic model's corpus shortname (e.g. frus)
+#
+# description:
+#    Updates a corpus specific topic model in the FOIArchive database.
 #
 # assumptions:
 #    - the script is invoked from the directory where it is installed
 #    - the topic model csv files have been loadded in the data subdirectory
+#    - that Postgres tools (min: psql, pg_dump) are installed and in the PATH
+#    - that the DBCONNECT environment variable is set to the db connect string
 
 # Validate arguments and environmental variables
 if [ -z "$1" ]; then
-    echo "Error: No corpus name prefix provided."
-    echo "Usage: $0 <corpus_name_prefix>"
+    echo "Error: No corpus shortname provided."
+    echo "Usage: $0 <corpus_shortname>"
     exit 1
 fi
 if [ -z "${DBCONNECT}" ]; then
@@ -52,4 +58,7 @@ heading "Load CSVs into staging tables:"
 load_stage topics
 load_stage topic_doc
 # Update the production tables from the stage tables
+heading "Replace the current topic model from ${CORPUS} with the new one:"
 psql -X -e ${DBCONNECT} -v corpus=${CORPUS} -f update-from-stage.sql
+# 
+heading "Script complete. Remember to upload topic model zip to s3."
