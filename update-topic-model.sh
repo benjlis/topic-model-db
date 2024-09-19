@@ -23,7 +23,11 @@ DATA_DIR=./data
 load_stage ()
 {
     table_name="foiarchive.${1}_stage"
-    csv_file="${CSV_DIR}/${CORPUS}_${1}.csv"
+    csv_file="${DATA_DIR}/${CORPUS}_${1}.csv"
+    if [ ! -f "$csv_file" ]; then
+        echo "Error: File ${csv_file} not found."
+        exit 1
+    fi
     psql -X -e ${DBCONNECT} <<!EOF!
     \copy ${table_name} from '${csv_file}' delimiter ',' csv header
 !EOF!
