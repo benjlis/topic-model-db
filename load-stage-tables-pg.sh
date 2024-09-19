@@ -21,6 +21,4 @@ load_stage ()
 
 load_stage topics
 load_stage topic_doc
-# TBD removal of token related tables
-# load_stage tokens
-# load_stage topic_token
+
