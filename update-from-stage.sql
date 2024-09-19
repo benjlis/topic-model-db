@@ -1,4 +1,6 @@
--- delete previous model
+-- delete the existing version of the model
+delete from foiarchive.topic_docs where corpus = :'corpus';
+delete from foiarchive.topics where corpus = :'corpus';
 
 -- populates the topic model tables from stage
 insert into foiarchive.topics(corpus, topic_id, title, name)
