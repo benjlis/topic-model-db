@@ -1,18 +1,23 @@
-# topic-model-db
-DDL and load db scripts for History Lab topics models.
+# topic-model-updates
+Scripts for updating a corpus-specific topic models in the FOIArchive database.
 
-Run the sql script `ddl/topic-model.sql` to install the topic model tables in an
-existing schema.
+# installation
+Clone this repo.
 
-To load topic models in History Lab csv format, run the following scripts in
-this order:
+# running a topic model db update
+1. Copy the topic model CSVs into the data subdirectory
+2. Define an environment varable called DBCONNECT containing the database connect string
+3. Run the shell script `update-topic-model.sh` in the directory where it is installed, passing it the shortcode for the corpus it is updating:
+```
+topic-model-updates % ./update-topic-model.sh frus
+```
+## assumption
+Postgres tools (at least psql, pg_dump) are installed and in the PATH
 
-1. `load/create-stage-tables.sql`
-2. `load/load-stage-tables-pg.sh` (PostgreSQL only)
-3. `load/populate-tables.sql`
-5. `load/drop-stage-tables.sql`
+# what does the script do?
+1. backs up the topic tables in case of error
+2. creates staging tables 
+3. loads the staging tables with the CSVs contents
+4. replaces the topic model for the corpus specified with the contents of the staging tables 
 
-Rename doc_id column in the topic_docs table if necessary and add referential
-integrity constraint.
-
-
+The script provides provides progress updates and error handling. For more details, review its source. Please reach out if something isn't clear or you encouter problems.
