@@ -20,6 +20,13 @@ fi
 CORPUS=${1}
 DATA_DIR=./data
 
+heading () {
+    echo
+    echo "======================================================================"
+    echo $1
+    echo "======================================================================"
+}
+
 load_stage ()
 {
     table_name="foiarchive.${1}_stage"
@@ -34,11 +41,14 @@ load_stage ()
 }
 
 # Main script body
-# Dump topics and topic_docs in case of operator error, no long term retention required
+# long term retention of this backup is not needed
+heading "Back up topics & topic_docs tables in case of error:"
 pg_dump -t foiarchive.topics -t foiarchive.topic_docs -f ${DATA_DIR}/topic-tables.sql -v ${DBCONNECT}
-# Drop and recreate the stage tables
+#
+heading "Drop and recreate the staging tables:"
 psql -X -e ${DBCONNECT} -f create-stage-tables.sql
-# Load the stage tables 
+#
+heading "Load CSVs into staging tables:"
 load_stage topics
 load_stage topic_doc
 # Update  the tables from the stage tables
