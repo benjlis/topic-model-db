@@ -11,6 +11,8 @@
 #    - the topic model csv files have been loadded in the data subdirectory
 #    - that Postgres tools (min: psql, pg_dump) are installed and in the PATH
 #    - that the DBCONNECT environment variable is set to the db connect string
+#    - zip is installed locally
+#    - aws cli has been installed and configured
 
 # Validate arguments and environmental variables
 if [ -z "$1" ]; then
@@ -61,4 +63,15 @@ load_stage topic_doc
 heading "Replace the current topic model from ${CORPUS} with the new one:"
 psql -X -e ${DBCONNECT} -v corpus=${CORPUS} -f update-from-stage.sql
 # 
-heading "Script complete. Remember to upload topic model zip to s3."
+heading "Zipping the csv files from ./data"
+DATE=`date +"%m-%d-%y"`
+zip "${1}_stm_${DATE}.zip" data/*.csv
+#
+heading "Copying zip file to aws"
+aws s3 cp "${1}_stm_${DATE}.zip" \
+          s3://history-lab-research-data/STM-2024/${1}_stm_${DATE}.zip
+#
+heading "Removing csv files from ./data"
+rm data/*.csv
+#
+heading "Script complete."
