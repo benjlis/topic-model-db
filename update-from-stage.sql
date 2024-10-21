@@ -13,4 +13,6 @@ select :'corpus', id, title, name
 insert into foiarchive.topic_docs(corpus, topic_id, doc_id, score)
 select :'corpus', topic_id, doc_id, topic_score 
     from foiarchive.topic_doc_stage;
+
+refresh materialized view foiarchive.corpora;
 commit;
